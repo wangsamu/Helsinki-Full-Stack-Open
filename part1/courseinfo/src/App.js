@@ -12,6 +12,7 @@ const Part = ({ part, exercise }) => {
     </p>
   );
 };
+
 const Content = (props) => {
   return (
     <>
