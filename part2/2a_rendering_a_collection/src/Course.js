@@ -14,7 +14,6 @@ const Part = ({ part }) => (
 const Content = ({ parts }) => (
   <>
     {parts.map((part, index) => {
-      console.log(part, index);
       return <Part key={part.name} part={parts[index]} />;
     })}
   </>
@@ -26,10 +25,7 @@ const Course = ({ course }) => {
     <div>
       <Header name={name} />
       <Content parts={parts} />
-      <Total
-        // sum={parts[0].exercises + parts[1].exercises + parts[2].exercises}
-        parts={parts}
-      />
+      <Total parts={parts} />
     </div>
   );
 };
