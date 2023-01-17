@@ -1,8 +1,7 @@
 const Header = ({ course }) => <h1>{course}</h1>;
 
 const Total = ({ parts }) => {
-  const exercisesArray = parts.map((part) => part.exercises);
-  const sum = exercisesArray.reduce((acc, cur) => acc + cur);
+  const sum = parts.reduce((acc, cur) => acc + cur.exercises, 0);
   return <h3>total of {sum} exercises </h3>;
 };
 
