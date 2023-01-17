@@ -1,6 +1,10 @@
 const Header = ({ course }) => <h1>{course}</h1>;
 
-const Total = ({ sum }) => <p>Number of exercises {sum}</p>;
+const Total = ({ parts }) => {
+  const exercisesArray = parts.map((part) => part.exercises);
+  const sum = exercisesArray.reduce((acc, cur) => acc + cur);
+  return <h3>total of {sum} exercises </h3>;
+};
 
 const Part = ({ part }) => (
   <p>
@@ -32,15 +36,24 @@ const Course = () => {
       name: 'State of a component',
       exercises: 14,
     },
+    {
+      name: 'redux',
+      exercises: 11,
+    },
+    {
+      name: 'random',
+      exercises: 100,
+    },
   ];
 
   return (
     <div>
       <Header course={course} />
       <Content parts={parts} />
-      {/* <Total
-        sum={parts[0].exercises + parts[1].exercises + parts[2].exercises}
-      /> */}
+      <Total
+        // sum={parts[0].exercises + parts[1].exercises + parts[2].exercises}
+        parts={parts}
+      />
     </div>
   );
 };
