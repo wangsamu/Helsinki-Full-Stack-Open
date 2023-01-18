@@ -8,8 +8,18 @@ const App = () => {
     setNewName(e.target.value);
   };
 
+  const nameInUse = (name) => {
+    return persons.find((person) => person.name === name);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(nameInUse(newName));
+
+    if (nameInUse(newName)) {
+      alert(`${newName} is already added to phonebook!`);
+      return;
+    }
     const newPersons = persons.concat({ name: newName });
     setPersons(newPersons);
     setNewName('');
