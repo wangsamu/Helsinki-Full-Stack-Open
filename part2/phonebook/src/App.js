@@ -18,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     console.log('useEffect!');
-    axios.get('http://localhost:3001/persons').then((response) => {
+    axios.get('http://localhost:4000/persons').then((response) => {
       console.log('data fetched using useEffect!');
       setPersons(response.data);
     });
@@ -40,7 +40,7 @@ const App = () => {
     return persons.find((person) => person.name === name);
   };
 
-  const handleSubmit = (e) => {
+  const addPerson = (e) => {
     e.preventDefault();
     console.log(nameInUse(newName));
 
@@ -48,10 +48,17 @@ const App = () => {
       alert(`${newName} is already added to phonebook!`);
       return;
     }
-    const newPersons = persons.concat({ name: newName, number: newNumber });
-    setPersons(newPersons);
-    setNewName('');
-    setNewNumber('');
+
+    const newId = Math.max(...persons.map((person) => person.id));
+    const newPerson = { id: newId, name: newName, number: newNumber };
+
+    axios
+      .put(`http://localhost:4000/persons/${newPerson.id}`, newPerson)
+      .then((response) => {
+        setPersons(persons.concat(response.data));
+        setNewName('');
+        setNewNumber('');
+      });
   };
 
   return (
@@ -59,7 +66,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <SearchBar searchValue={searchValue} handleSearch={handleSearch} />
       <AddContactForm
-        handleSubmit={handleSubmit}
+        handleSubmit={addPerson}
         newName={newName}
         handleNameChange={handleNameChange}
         newNumber={newNumber}

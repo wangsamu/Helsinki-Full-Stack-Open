@@ -8,6 +8,7 @@ function AddContactForm(props) {
     newNumber,
     handleNumberChange,
   } = props;
+  
   return (
     <div>
       <form onSubmit={handleSubmit}>
