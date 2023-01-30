@@ -1,15 +1,18 @@
 import React from 'react';
 
-function ContactList({ persons, searchValue }) {
+function ContactList({ persons, searchValue, handleDelete }) {
   return (
     <div>
       <h2>Numbers</h2>
       {persons.map(
-        ({ name, number }) =>
+        ({ name, number, id }) =>
           name.toLowerCase().includes(searchValue.toLowerCase()) && (
-            <p key={name}>
-              {name} {number}
-            </p>
+            <div key={id}>
+              <p>
+                {name} {number}
+              </p>
+              <button onClick={() => handleDelete(id)}>X</button>
+            </div>
           )
       )}
     </div>

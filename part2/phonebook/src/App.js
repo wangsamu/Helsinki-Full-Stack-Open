@@ -42,7 +42,6 @@ const App = () => {
 
   const addPerson = (e) => {
     e.preventDefault();
-    console.log(nameInUse(newName));
 
     if (nameInUse(newName)) {
       alert(`${newName} is already added to phonebook!`);
@@ -61,6 +60,13 @@ const App = () => {
       });
   };
 
+  const deletePerson = (id) => {
+    axios.delete(`http://localhost:4000/persons/${id}`).then((response) => {
+      console.log(response.data);
+      setPersons(persons.filter((person) => person.id !== id));
+    });
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -72,7 +78,11 @@ const App = () => {
         newNumber={newNumber}
         handleNumberChange={handleNumberChange}
       />
-      <ContactList persons={persons} searchValue={searchValue} />
+      <ContactList
+        persons={persons}
+        searchValue={searchValue}
+        handleDelete={deletePerson}
+      />
     </div>
   );
 };
