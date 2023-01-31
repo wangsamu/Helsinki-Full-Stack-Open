@@ -64,8 +64,8 @@ const App = () => {
   };
 
   const deletePerson = (id) => {
-    axios.delete(`http://localhost:4000/persons/${id}`).then((response) => {
-      console.log(response.data);
+    personsServices.deletePerson(id).then(() => {
+      console.log('Person deleted');
       setPersons(persons.filter((person) => person.id !== id));
     });
   };

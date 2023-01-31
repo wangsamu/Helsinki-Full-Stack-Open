@@ -13,10 +13,9 @@ const create = (newPersonObject) => {
   });
 };
 
-const deletePerson = (personToDelete) => {
+const deletePerson = (idOfPersonToDelete) => {
   const request = axios.delete(
-    `http://localhost:4000/persons/${personToDelete.id}`,
-    personToDelete
+    `http://localhost:4000/persons/${idOfPersonToDelete}`
   );
   return request.then((returnedDeletedPerson) => returnedDeletedPerson.data);
 };
