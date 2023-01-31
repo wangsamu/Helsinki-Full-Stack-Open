@@ -13,6 +13,14 @@ const create = (newPersonObject) => {
   });
 };
 
+const updateNumber = (personToupdate, newNumber) => {
+  const request = axios
+    .put(`http://localhost:4000/persons/${personToupdate}`, {
+      number: newNumber,
+    })
+    .then((response) => response.data);
+};
+
 const deletePerson = (idOfPersonToDelete) => {
   const request = axios.delete(
     `http://localhost:4000/persons/${idOfPersonToDelete}`
@@ -20,4 +28,4 @@ const deletePerson = (idOfPersonToDelete) => {
   return request.then((returnedDeletedPerson) => returnedDeletedPerson.data);
 };
 
-export default { getAll, create, deletePerson };
+export default { getAll, create, updateNumber, deletePerson };

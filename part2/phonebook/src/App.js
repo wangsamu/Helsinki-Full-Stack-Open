@@ -36,16 +36,30 @@ const App = () => {
     setNewNumber(e.target.value);
   };
 
-  const isNameInUse = (name) => {
-    return persons.find((person) => person.name === name);
-  };
-
   const addPerson = (e) => {
     e.preventDefault();
 
-    if (isNameInUse(newName)) {
-      alert(`${newName} is already added to phonebook!`);
-      return;
+    const existingPersonWithSameName = persons.find(
+      (person) => person.name === newName
+    );
+
+    if (existingPersonWithSameName) {
+      const hasSameNumber = existingPersonWithSameName.number === newNumber;
+      console.log(hasSameNumber);
+
+      if (hasSameNumber(newName, newNumber)) {
+        alert(
+          `The person ${newName} with ${newNumber} is already in phonebook!`
+        );
+        return;
+      } else {
+        window.confirm(
+          `${newName} is already saved in phonebook. Do you want to replace the existing number with the new one?`
+        );
+        console.log('patata');
+
+        return;
+      }
     }
 
     // const newId = Math.max(...persons.map((person) => person.id));
