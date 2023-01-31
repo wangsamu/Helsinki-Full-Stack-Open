@@ -5,12 +5,12 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
-const create = (newPerson) => {
-  const request = axios.post(
-    `http://localhost:4000/persons/${newPerson.id}`,
-    newPerson
-  );
-  return request.then((response) => response.data);
+const create = (newPersonObject) => {
+  const request = axios.post(`http://localhost:4000/persons/`, newPersonObject);
+  return request.then((response) => {
+    console.log('New person created!', response.data);
+    return response.data;
+  });
 };
 
 const deletePerson = (personToDelete) => {

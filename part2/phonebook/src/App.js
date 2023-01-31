@@ -48,16 +48,19 @@ const App = () => {
       return;
     }
 
-    const newId = Math.max(...persons.map((person) => person.id));
-    const newPerson = { id: newId, name: newName, number: newNumber } + 1;
+    // const newId = Math.max(...persons.map((person) => person.id));
+    const newPerson = { name: newName, number: newNumber };
 
-    axios
-      .put(`http://localhost:4000/persons/${newPerson.id}`, newPerson)
-      .then((response) => {
-        setPersons(persons.concat(response.data));
+    console.log(newPerson);
+
+    personsServices
+      .create(newPerson)
+      .then((returnedNewPerson) => {
+        setPersons(persons.concat(returnedNewPerson));
         setNewName('');
         setNewNumber('');
-      });
+      })
+      .catch((error) => alert(error));
   };
 
   const deletePerson = (id) => {
