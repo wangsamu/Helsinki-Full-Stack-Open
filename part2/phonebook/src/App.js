@@ -39,6 +39,11 @@ const App = () => {
   const addPerson = (e) => {
     e.preventDefault();
 
+    if (!newName.length || !newNumber.length) {
+      alert('please introduce valid name and number');
+      return;
+    }
+
     const existingPersonWithSameName = persons.find(
       (person) => person.name === newName
     );
@@ -52,11 +57,11 @@ const App = () => {
           `The person ${newName} with ${newNumber} is already in phonebook!`
         );
         return;
-      } else {
+      } else if (
         window.confirm(
           `${newName} is already saved in phonebook. Do you want to replace the existing number with the new one?`
-        );
-
+        )
+      ) {
         const PersonWithNewNumber = {
           ...existingPersonWithSameName,
           number: newNumber,
@@ -80,13 +85,12 @@ const App = () => {
           .catch((error) => alert(error));
 
         return;
+      } else {
+        return;
       }
     }
 
-    // const newId = Math.max(...persons.map((person) => person.id));
     const newPerson = { name: newName, number: newNumber };
-
-    console.log(newPerson);
 
     personsServices
       .create(newPerson)
