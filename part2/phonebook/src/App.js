@@ -63,10 +63,14 @@ const App = () => {
       .catch((error) => alert(error));
   };
 
-  const deletePerson = (id) => {
-    personsServices.deletePerson(id).then(() => {
+  const deletePerson = (idOfPersonToDelete, nameOfPersonToDelete) => {
+    window.confirm(
+      `Delete permanently person ${idOfPersonToDelete}: ${nameOfPersonToDelete}?`
+    );
+
+    personsServices.deletePerson(idOfPersonToDelete).then(() => {
       console.log('Person deleted');
-      setPersons(persons.filter((person) => person.id !== id));
+      setPersons(persons.filter((person) => person.id !== idOfPersonToDelete));
     });
   };
 

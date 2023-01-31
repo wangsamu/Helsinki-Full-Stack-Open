@@ -14,7 +14,7 @@ function ContactList({ persons, searchValue, handleDelete }) {
               <p>
                 {name} {number}
               </p>
-              <button onClick={() => handleDelete(id)}>X</button>
+              <button onClick={() => handleDelete(id, name)}>X</button>
             </div>
           )
       )}
