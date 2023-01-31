@@ -47,7 +47,7 @@ const App = () => {
       const hasSameNumber = existingPersonWithSameName.number === newNumber;
       console.log(hasSameNumber);
 
-      if (hasSameNumber(newName, newNumber)) {
+      if (hasSameNumber) {
         alert(
           `The person ${newName} with ${newNumber} is already in phonebook!`
         );
@@ -56,7 +56,28 @@ const App = () => {
         window.confirm(
           `${newName} is already saved in phonebook. Do you want to replace the existing number with the new one?`
         );
-        console.log('patata');
+
+        const PersonWithNewNumber = {
+          ...existingPersonWithSameName,
+          number: newNumber,
+        };
+
+        personsServices
+          .updateNumber(existingPersonWithSameName, PersonWithNewNumber)
+          .then((returnedUpdatedPerson) => {
+            console.log('person updated!', returnedUpdatedPerson);
+
+            setPersons(
+              persons.map((person) =>
+                person.id === returnedUpdatedPerson.id
+                  ? returnedUpdatedPerson
+                  : person
+              )
+            );
+            setNewName('');
+            setNewNumber('');
+          })
+          .catch((error) => alert(error));
 
         return;
       }

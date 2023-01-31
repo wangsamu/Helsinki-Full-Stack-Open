@@ -13,12 +13,12 @@ const create = (newPersonObject) => {
   });
 };
 
-const updateNumber = (personToupdate, newNumber) => {
-  const request = axios
-    .put(`http://localhost:4000/persons/${personToupdate}`, {
-      number: newNumber,
-    })
-    .then((response) => response.data);
+const updateNumber = (personToUpdate, personObject) => {
+  const request = axios.put(
+    `http://localhost:4000/persons/${personToUpdate.id}`,
+    personObject
+  );
+  return request.then((response) => response.data);
 };
 
 const deletePerson = (idOfPersonToDelete) => {
