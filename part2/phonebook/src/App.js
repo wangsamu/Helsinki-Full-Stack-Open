@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import AddContactForm from './AddContactForm';
 import ContactList from './ContactList';
 import SearchBar from './SearchBar';
+import personsServices from './services/persons';
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -17,10 +18,8 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('');
 
   useEffect(() => {
-    console.log('useEffect!');
-    axios.get('http://localhost:4000/persons').then((response) => {
-      console.log('data fetched using useEffect!');
-      setPersons(response.data);
+    personsServices.getAll().then((returnedPersons) => {
+      setPersons(returnedPersons);
     });
   }, []);
 
