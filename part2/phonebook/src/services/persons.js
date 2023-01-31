@@ -10,7 +10,15 @@ const create = (newPerson) => {
     `http://localhost:4000/persons/${newPerson.id}`,
     newPerson
   );
-  return request.then((returnedNewPerson) => returnedNewPerson.data);
+  return request.then((response) => response.data);
 };
 
-export default { getAll, create };
+const deletePerson = (personToDelete) => {
+  const request = axios.delete(
+    `http://localhost:4000/persons/${personToDelete.id}`,
+    personToDelete
+  );
+  return request.then((returnedDeletedPerson) => returnedDeletedPerson.data);
+};
+
+export default { getAll, create, deletePerson };

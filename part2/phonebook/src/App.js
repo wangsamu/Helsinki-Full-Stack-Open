@@ -19,6 +19,7 @@ const App = () => {
 
   useEffect(() => {
     personsServices.getAll().then((returnedPersons) => {
+      console.log(returnedPersons);
       setPersons(returnedPersons);
     });
   }, []);
@@ -35,20 +36,20 @@ const App = () => {
     setNewNumber(e.target.value);
   };
 
-  const nameInUse = (name) => {
+  const isNameInUse = (name) => {
     return persons.find((person) => person.name === name);
   };
 
   const addPerson = (e) => {
     e.preventDefault();
 
-    if (nameInUse(newName)) {
+    if (isNameInUse(newName)) {
       alert(`${newName} is already added to phonebook!`);
       return;
     }
 
     const newId = Math.max(...persons.map((person) => person.id));
-    const newPerson = { id: newId, name: newName, number: newNumber };
+    const newPerson = { id: newId, name: newName, number: newNumber } + 1;
 
     axios
       .put(`http://localhost:4000/persons/${newPerson.id}`, newPerson)
