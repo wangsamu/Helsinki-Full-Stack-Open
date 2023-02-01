@@ -5,6 +5,7 @@ import ContactList from './ContactList';
 import { Notification } from './Notification';
 import SearchBar from './SearchBar';
 import personsServices from './services/persons';
+import './App.css';
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -37,6 +38,20 @@ const App = () => {
 
   const handleNumberChange = (e) => {
     setNewNumber(e.target.value);
+  };
+
+  const newSuccess = (message) => {
+    setSuccessMessage(message);
+    setTimeout(() => {
+      setSuccessMessage(null);
+    }, 4500);
+  };
+
+  const newError = (message) => {
+    setErrorMessage(message);
+    setTimeout(() => {
+      setSuccessMessage(null);
+    }, 4500);
   };
 
   const addPerson = (e) => {
@@ -74,7 +89,7 @@ const App = () => {
           .updateNumber(existingPersonWithSameName, PersonWithNewNumber)
           .then((returnedUpdatedPerson) => {
             console.log('person updated!', returnedUpdatedPerson);
-
+            newSuccess(`${returnedUpdatedPerson.name} added successfully!`);
             setPersons(
               persons.map((person) =>
                 person.id === returnedUpdatedPerson.id
@@ -98,6 +113,7 @@ const App = () => {
     personsServices
       .create(newPerson)
       .then((returnedNewPerson) => {
+        newSuccess(`${newPerson.name} added sucessfully!`);
         setPersons(persons.concat(returnedNewPerson));
         setNewName('');
         setNewNumber('');
@@ -111,7 +127,7 @@ const App = () => {
     );
 
     personsServices.deletePerson(idOfPersonToDelete).then(() => {
-      console.log('Person deleted');
+      newSuccess(`${nameOfPersonToDelete} has been deleted succesfully!`);
       setPersons(persons.filter((person) => person.id !== idOfPersonToDelete));
     });
   };
@@ -121,7 +137,7 @@ const App = () => {
       <h2 className='title'>Phonebook</h2>
       <Notification
         errorMessage={errorMessage}
-        setSuccessMessage={successMessage}
+        successMessage={successMessage}
       />
       <SearchBar searchValue={searchValue} handleSearch={handleSearch} />
       <AddContactForm

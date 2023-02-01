@@ -1,0 +1,12 @@
+.title {
+  color: blue;
+  font-size: 3rem;
+}
+
+.success-notification {
+  background-color: #2ecc71;
+  text-align: center;
+  font-size: 1.5rem;
+  border: solid 2px black;
+  border-radius: 0.2rem;
+}
