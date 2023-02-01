@@ -129,10 +129,19 @@ const App = () => {
       `Delete permanently person ${idOfPersonToDelete}: ${nameOfPersonToDelete}?`
     );
 
-    personsServices.deletePerson(idOfPersonToDelete).then(() => {
-      newSuccess(`${nameOfPersonToDelete} has been deleted succesfully!`);
-      setPersons(persons.filter((person) => person.id !== idOfPersonToDelete));
-    });
+    personsServices
+      .deletePerson(idOfPersonToDelete)
+      .then(() => {
+        newSuccess(`${nameOfPersonToDelete} has been deleted succesfully!`);
+        setPersons(
+          persons.filter((person) => person.id !== idOfPersonToDelete)
+        );
+      })
+      .catch((error) => {
+        newError(
+          `${nameOfPersonToDelete} has already been deleted form the database!`
+        );
+      });
   };
 
   return (
