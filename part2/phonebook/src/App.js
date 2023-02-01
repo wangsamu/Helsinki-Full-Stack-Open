@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import AddContactForm from './AddContactForm';
 import ContactList from './ContactList';
+import { Notification } from './Notification';
 import SearchBar from './SearchBar';
 import personsServices from './services/persons';
 
@@ -16,6 +17,8 @@ const App = () => {
   const [searchValue, setSearchValue] = useState('');
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     personsServices.getAll().then((returnedPersons) => {
@@ -115,7 +118,11 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h2 className='title'>Phonebook</h2>
+      <Notification
+        errorMessage={errorMessage}
+        setSuccessMessage={successMessage}
+      />
       <SearchBar searchValue={searchValue} handleSearch={handleSearch} />
       <AddContactForm
         handleSubmit={addPerson}
