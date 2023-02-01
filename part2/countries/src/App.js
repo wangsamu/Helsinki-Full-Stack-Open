@@ -1,7 +1,15 @@
 import './App.css';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
   const [serachValue, setSearchValue] = useState('');
+
+  useEffect(() => {
+    axios
+      .get('https://restcountries.com/v3.1/all')
+      .then((response) => console.log(response.data));
+  }, []);
 
   const handleChange = (event) => {
     setSearchValue(event.target.value);
@@ -9,12 +17,10 @@ function App() {
 
   return (
     <div className='App'>
-      <header className='App-header'>
-        <p>Country Data:</p>
-      </header>
+      <h1>Country Data:</h1>
       <div>
         Find countries:
-        <input value={serachValue} onChange={handleChange} />
+        <input type={Text} value={serachValue} onChange={handleChange} />
       </div>
     </div>
   );
