@@ -89,7 +89,10 @@ const App = () => {
           .updateNumber(existingPersonWithSameName, PersonWithNewNumber)
           .then((returnedUpdatedPerson) => {
             console.log('person updated!', returnedUpdatedPerson);
-            newSuccess(`${returnedUpdatedPerson.name} added successfully!`);
+
+            newSuccess(
+              `${returnedUpdatedPerson.name}'s number updated successfully!`
+            );
             setPersons(
               persons.map((person) =>
                 person.id === returnedUpdatedPerson.id
