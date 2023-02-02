@@ -29,6 +29,10 @@ function App() {
     );
   }, [searchValue]);
 
+  const showCountry = (country) => {
+    setMatchingCountries(country);
+  };
+
   return (
     <div className='App'>
       <h1>Country Data:</h1>
@@ -36,7 +40,7 @@ function App() {
         Find countries:
         <input type='text' value={searchValue} onChange={handleChange} />
       </div>
-      <List matchingCountries={matchingCountries} />
+      <List matchingCountries={matchingCountries} showCountry={showCountry} />
     </div>
   );
 }

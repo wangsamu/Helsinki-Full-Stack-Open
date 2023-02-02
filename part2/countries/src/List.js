@@ -1,7 +1,7 @@
 import React from 'react';
 import { CountryData } from './CountryData';
 
-export const List = ({ matchingCountries }) => {
+export const List = ({ matchingCountries, showCountry }) => {
   if (matchingCountries && matchingCountries.length > 10) {
     return <p>Too many results, please specify your search! 🤗</p>;
   }
@@ -14,7 +14,10 @@ export const List = ({ matchingCountries }) => {
     <div>
       {matchingCountries &&
         matchingCountries.map((country) => (
-          <p key={country.name.common}>{country.name.common}</p>
+          <div>
+            <p key={country.name.common}>{country.name.common}</p>
+            <button onClick={() => showCountry([country])}>show</button>
+          </div>
         ))}
     </div>
   );
