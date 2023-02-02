@@ -10,7 +10,7 @@ export const CountryData = ({ country }) => {
       <p>Population: {country.population}</p>
       <h3>Languages:</h3>
       {Object.values(country.languages).map((language) => (
-        <p>{language}</p>
+        <p key={language}>{language}</p>
       ))}
       <img src={country.flags.png} />
     </div>
