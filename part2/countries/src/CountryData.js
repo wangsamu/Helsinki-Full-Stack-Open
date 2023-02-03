@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Weather } from './Weather';
 
 export const CountryData = ({ country }) => {
   const [weatherData, setWeatherData] = useState();
@@ -33,18 +34,7 @@ export const CountryData = ({ country }) => {
       ))}
       <img src={country.flags.png} />
       <h3>Weather in {country.capital[0]} now:</h3>
-      {weatherData && (
-        <div>
-          <img
-            src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-          />
-          <p>{weatherData.weather[0].description}</p>
-          <p>
-            temperature: {(weatherData.main.temp - 273.15).toFixed(2)} Celcius
-          </p>
-          <p>wind: {weatherData.wind.speed} m/s</p>
-        </div>
-      )}
+      {weatherData && <Weather weatherData={weatherData} />}
     </div>
   );
 };
