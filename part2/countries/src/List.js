@@ -14,8 +14,8 @@ export const List = ({ matchingCountries, showCountry }) => {
     <div>
       {matchingCountries &&
         matchingCountries.map((country) => (
-          <div>
-            <p key={country.name.common}>{country.name.common}</p>
+          <div key={country.name.common}>
+            <p>{country.name.common}</p>
             <button onClick={() => showCountry([country])}>show</button>
           </div>
         ))}
